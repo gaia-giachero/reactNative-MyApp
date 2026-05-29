@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  StyleSheet,
-  ScrollView,
-  TextInput,
-  Switch,
-  Text,
-} from "react-native";
+import { StyleSheet, ScrollView, TextInput, Switch, Text} from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import SettingRow from "./components/SettingRow";
 

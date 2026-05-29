@@ -6,6 +6,7 @@ import {
   Text,
   Pressable,
   View,
+  TouchableOpacity,
 } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 
@@ -15,11 +16,12 @@ export default function App() {
   const [password, setPassword] = React.useState("");
   const passwordOk = password.length >= 6;
 
+  const [visible, setVisible] = React.useState(false);
   const [submitted, setSubmitted] = React.useState(false);
   const [loggedIn, setLoggedIn] = React.useState(false);
 
   function messLog() {
-    setSubmitted(true); 
+    setSubmitted(true);
     if (emailOk && passwordOk) {
       setLoggedIn(true);
     }
@@ -38,12 +40,21 @@ export default function App() {
             />
             {submitted && !emailOk && <Text>Email must include @</Text>}
 
-            <TextInput
-              style={styles.row}
-              value={password}
-              onChangeText={setPassword}
-              placeholder="Password"
-            />
+            <View style={styles.passwordContainer}>
+              <TextInput
+                style={styles.row}
+                value={password}
+                onChangeText={setPassword}
+                secureTextEntry={!visible}
+                placeholder="Password"
+              />
+              <TouchableOpacity
+                style={styles.eyeIcon}
+                onPress={() => setVisible((prev) => !prev)}
+              >
+                <Text>{visible ? "🫣" : "👁️"}</Text>
+              </TouchableOpacity>
+            </View>
 
             {submitted && !passwordOk && <Text>Min 6 characters</Text>}
 
@@ -106,5 +117,15 @@ const styles = StyleSheet.create({
     color: "#06aa00",
     textAlign: "center",
     marginTop: 5,
+  },
+  passwordContainer: {
+    position: "relative",
+    marginBottom: 10,
+  },
+  eyeIcon: {
+    position: "absolute",
+    right: 12,
+    top: "50%", // centra verticalmente
+    transform: [{ translateY: -12 }], // aggiusta per metà altezza dell'emoji
   },
 });
