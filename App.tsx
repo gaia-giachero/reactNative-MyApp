@@ -1,4 +1,4 @@
-import Lab from './livecode/L09/App'
+import Lab from './livecode/L10/App'
 
 export default function App(){
     return(
